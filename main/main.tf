@@ -2,24 +2,26 @@ provider "azurerm" {
     features {}
 }
 module "resource_group" {
-  source = "../module/rg"
+  source = "../module/resource"
 }
-module "azurerm_storage_account" {
-  source = "../module/st"
+module "azurerm_key_vault" {
+  source = "../module/keyvault"
   depends_on = [
     module.resource_group
   ]
-  resource_group_name = module.resource_group.resource_group_name
 }
-module "azurerm_service_plan" {
-  source = "../module/sp"
+module "azurerm_cosmosdb_account" {
+  source = "../module/codb"
   depends_on = [
-    module.azurerm_storage_account
+    module.azurerm_key_vault
   ]
 }
-module "azurerm_function_app" {
-  source = "../module/fa"
+module "azurerm_key_vault_secret"{
+  source = "../module/dbkeyse"
   depends_on = [
-    module.azurerm_service_plan
+    module.azurerm_cosmosdb_account
   ]
 }
+
+ 
+
