@@ -1,7 +1,7 @@
 variable "rg_name" {
     description = "Name of the Resource Group"
     type = string
-    default     = "RG_Funtionappproj1"
+    default     = "RG_keyp2"
 }
 variable "location" {
     description = "Location where the resources will be created"
